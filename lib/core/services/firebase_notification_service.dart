@@ -103,9 +103,17 @@ class FirebaseNotificationService {
       await androidPlugin.requestNotificationsPermission();
     }
 
-    // Android notification icons must be valid drawable resources (e.g. @drawable/ic_notification) for status-bar display.
+    // iOS & Android initialization settings
+    const DarwinInitializationSettings darwinSettings =
+        DarwinInitializationSettings(
+      requestAlertPermission: true,
+      requestBadgePermission: true,
+      requestSoundPermission: true,
+    );
+
     const InitializationSettings initializationSettings = InitializationSettings(
       android: AndroidInitializationSettings('@drawable/ic_notification'),
+      iOS: darwinSettings,
     );
 
     await _localNotifications.initialize(
@@ -116,7 +124,7 @@ class FirebaseNotificationService {
     );
   }
 
-  /// Displays a local Android notification from the incoming FCM RemoteMessage.
+  /// Displays a local Android & iOS notification from the incoming FCM RemoteMessage.
   /// We extract title and body from the notification payload or data payload with sensible fallbacks.
   static Future<void> _showLocalNotification(RemoteMessage message) async {
     final String title = message.notification?.title ??
@@ -147,6 +155,11 @@ class FirebaseNotificationService {
             importance: Importance.max,
             priority: Priority.high,
             icon: '@drawable/ic_notification',
+          ),
+          iOS: DarwinNotificationDetails(
+            presentAlert: true,
+            presentBadge: true,
+            presentSound: true,
           ),
         ),
         payload: jsonEncode(message.data),

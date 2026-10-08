@@ -70,10 +70,31 @@
 	<string>We need your location to deliver orders to the correct address and find nearby stores.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>We need your location to deliver orders to the correct address and find nearby stores.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>We need your location to deliver orders to the correct address and find nearby stores.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>We need access to your camera to let you upload profile pictures.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>We need access to your photo library to let you upload profile pictures.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>We need speech recognition permission to allow searching products by voice.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>We need microphone access to enable voice search for products.</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>https</string>
+		<string>http</string>
+		<string>tel</string>
+		<string>mailto</string>
+		<string>upi</string>
+		<string>paytmmp</string>
+		<string>gpay</string>
+		<string>phonepe</string>
+	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
