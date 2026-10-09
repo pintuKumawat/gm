@@ -8,6 +8,7 @@ if(keystorePropertiesFile.exists()){
     keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 }
 
+
 plugins {
     id("com.android.application")
     id("com.google.gms.google-services")
@@ -16,7 +17,7 @@ plugins {
 }
 
 android {
-    namespace = "com.kvon.grahmitra"
+    namespace = "com.app.grahmitra"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -28,7 +29,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.kvon.grahmitra"
+        applicationId = "com.app.grahmitra"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
@@ -37,11 +38,27 @@ android {
         versionName = flutter.versionName
     }
 
-    buildTypes {
-        release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.getByName("debug")
+   signingConfigs {
+        create("release"){
+            keyAlias = keystoreProperties["keyAlias"].toString()
+            keyPassword = keystoreProperties["keyPassword"].toString()
+            val storeFilePath = keystoreProperties["storeFile"].toString()
+            if(storeFilePath != null){
+                storeFile=file(storeFilePath)
+            }
+            storePassword = keystoreProperties["storePassword"].toString()
+        }
+    }
+
+    buildTypes { 
+        getByName("release"){
+            if(keystorePropertiesFile.exists()){
+                signingConfig=signingConfigs.getByName("release")
+            }
+            isMinifyEnabled=true
+            isShrinkResources=true
+
+           
         }
     }
 }

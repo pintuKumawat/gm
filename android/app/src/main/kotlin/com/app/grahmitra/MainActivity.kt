@@ -1,4 +1,4 @@
-package com.kvon.grahmitra
+package com.app.grahmitra
 
 import io.flutter.embedding.android.FlutterActivity
 
